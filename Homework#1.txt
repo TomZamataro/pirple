@@ -1,0 +1,87 @@
+// This is "Homework #1" of the "Keeping Up With The Javascripts: ES6" course of Pirple.com
+
+// This Variable contains the name of the song, on the string data-type
+var songName = "Kill Yourself (Part III)";
+
+/* This Variable contains the name of the band that peforms the song,
+on the string data-type
+*/
+var songBand = "$uicideBoy$";
+
+/* This Variable contains the name of the album that the song belongs to,
+on the string data-type
+*/
+var songAlbum = "My Liver Will Handle What My Heart Can't";
+
+// This Variable contains the relase date of the song, on the string data-type
+var songDate = "09/21/2015";
+
+/* This Object contains the duration of the song, in minutes:seconds and seconds,
+on the string and number data-type respectively
+*/
+var songTime = {
+  minSec: "2:25",
+  sec: 145,
+};
+
+// This Array contains the writers of the song, on the string data-type
+var songWrit = ["Aristos Petrou", "Scott Arceneaux Jr."];
+
+// This Variable contains the producer of the song, on the string data-type
+var songProd = "Budd Dwyer";
+
+// This Variable contains the record label of the song, on the string data-type
+var songRecL = "G59 Records, LLC";
+
+/* This Array contains the platforms that the song is currently avalible,
+on the string data-type
+*/
+var songPlatf = ["Spotify", "Deezer", "YouTube"];
+
+// This Variable contains the word count of the song, on the number data-type
+var songWCount = 340;
+
+// This Variable contains the BPM (Beats per Second) of the song, on the number data-type
+var songBpm = 105;
+
+/* This Object contains the most used word of the song and how many times it was used, 
+on the string and number data-type respectively
+*/
+var songMostUW = {
+  word: "get",
+  timesUsed: 6,
+};
+
+// This Variable contains the number of paragraphs on the song, on the number data-type
+var songParag = 56;
+
+/* This Object contains the reading time of the song, in minutes:seconds and seconds,
+on the string and number data-type respectively
+*/
+var songReadT = {
+  minSec: "1:14",
+  sec: 74,
+};
+
+// "console.loging" them 
+console.log(" Name of the song: " + songName,
+           " Band that peforms the song: " + songBand,
+           " Album that the song belongs to: " + songAlbum,
+           " The relase date of the song: " + songDate,
+           " The duration of the song:",
+           "  -In minutes:seconds: " + songTime.minSec,
+           "  -In seconds: " + songTime.sec,
+           " The writters of the song: " + songWrit[0] + " and " + songWrit[1],
+           " The producer of the song: " + songProd,
+           " The redord label of the song: " + songRecL,
+           " The platforms that the song is currently avalible: " + songPlatf.join(", "),
+           " The word count of the song: " + songWCount,
+           " The BPM (Beats per Second) of the song: " + songBpm,
+           " The most used word in the song and how many times it was used:",
+           "  -The most used word: " + songMostUW.word,
+           "  -How many times it was used: " + songMostUW.timesUsed,
+           " How many paragraphs the song has: " + songParag,
+           " The reading time of the song:",
+           "  -In minutes:seconds: " + songReadT.minSec,
+           "  -In seconds: " + songReadT.sec);
+
