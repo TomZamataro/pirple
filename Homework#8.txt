@@ -1,0 +1,209 @@
+// Homework#8 of Keeping Up With The Javascripts: ES6 by Pirple.com
+
+const newStyleClass = (parent, name, rule) =>
+{
+  const ns = document.createElement("STYLE");
+  ns.type = "text/css";
+  ns.innerHTML = `.${name} ${rule}`;
+  parent.appendChild(ns);
+  return ns;
+}
+
+const newElement = (parent, type, id = false, clas = false) =>
+{
+  const ne = document.createElement(type);
+  if (id) ne.id = id;
+  if (clas) if (typeof clas !== "string") for (c of clas)
+  {
+    ne.classList.add(c);
+    if (c === "xMark") ne.innerText = "X";
+    else if (c === "oMark") ne.innerText = "O";
+  }
+  else ne.classList.add(clas);
+  if (clas === "xMark") ne.innerText = "X";
+  else if (clas === "oMark") ne.innerText = "O";
+  parent.appendChild(ne);
+  return ne;
+}
+
+const newMark = (parent, wich, id = false) =>
+{
+  const x = ["mark", "xMark"];
+  const o = ["mark", "oMark"];
+  wich = wich.toLowerCase();
+  if (!id)
+  {
+    if (wich === "x") return newElement(parent, "H1", false, x);
+    else if (wich === "o") return newElement(parent, "H1", false, o);
+  }
+  else
+  {
+    if (wich === "x") return newElement(parent, "H1", id, x);
+    else return newElement(parent, "H1", id, o);
+  }
+}
+
+const html = document.getElementsByTagName("HTML")[0];
+const main = document.body;
+const toSeeSty = newStyleClass(html, "toSeeSty", "{border: 5px solid yellow;" +
+                                                 " position: absolute;" +
+                                                 " margin: 100px;" +
+                                                 " margin-top: -1px;" +
+                                                 " padding: 100px 100px 100px 100px;" +
+                                                 " background-color: purple;}")
+const spaceSty = newStyleClass(html, "spaceSty", "{border: 7px solid purple;" +
+                                           " height: 100px;" +
+                                           " width: 100px;" +
+                                           " text-align: center;" +
+                                           " generic-family: monospace;" +
+                                           " font-family: Courier New;}");
+const mark = newStyleClass(html, "mark", "{font-size: 120px;" +
+                                         " margin-top: -20px}");
+const xMark = newStyleClass(html, "xMark", "{color: red}");
+const oMark = newStyleClass(html, "oMark", "{color: black}");
+const toSeeEle = newElement(main, "DIV", "gameBord", "toSeeSty");
+
+// #region 1st row.
+const row1 = newElement(toSeeEle, "DIV");
+const row1S = row1.style;
+const spc1 = newElement(row1, "DIV", false, "spaceSty");
+const spc1S = spc1.style;
+const spc2 = newElement(row1, "DIV", false, "spaceSty");
+const spc2S = spc2.style;
+const spc3 = newElement(row1, "DIV", "false", "spaceSty");
+const spc3S = spc3.style;
+spc1S.cssFloat = "left";
+spc2S.marginLeft = "-7px";
+spc2S.cssFloat = "left";
+spc3S.marginLeft = "207px";
+spc1S.borderBottom = "7px solid magenta";
+spc2S.borderBottom = "7px solid magenta";
+spc2S.borderLeft = "7px solid magenta";
+spc2S.borderRight = "7px solid magenta";
+spc3S.borderBottom = "7px solid magenta";
+// #endregion
+
+// #region 1st row.
+const row2 = newElement(toSeeEle, "DIV");
+const row2S = row2.style;
+const spc4 = newElement(row2, "DIV", false, "spaceSty");
+const spc4S = spc4.style;
+const spc5 = newElement(row2, "DIV", false, "spaceSty");
+const spc5S = spc5.style;
+const spc6 = newElement(row2, "DIV", false, "spaceSty");
+const spc6S = spc6.style;
+spc4S.cssFloat = "left";
+spc5S.marginLeft = "-7px";
+spc5S.cssFloat = "left";
+// spc6S.cssFloat = "left";
+spc6S.marginLeft = "207px";
+spc4S.borderBottom = "7px solid magenta";
+spc5S.borderBottom = "7px solid magenta";
+spc5S.borderLeft = "7px solid magenta";
+spc5S.borderRight = "7px solid magenta";
+spc6S.borderBottom = "7px solid magenta";
+// #endregion
+
+// #region 1st row.
+const row3 = newElement(toSeeEle, "DIV");
+const row3S = row3.style;
+const spc7 = newElement(row3, "DIV", false, "spaceSty");
+const spc7S = spc7.style;
+const spc8 = newElement(row3, "DIV", false, "spaceSty");
+const spc8S = spc8.style;
+const spc9 = newElement(row3, "DIV", false, "spaceSty");
+const spc9S = spc9.style;
+spc7S.cssFloat = "left";
+spc8S.marginLeft = "-7px";
+spc8S.cssFloat = "left";
+spc9S.marginLeft = "207px";
+spc8S.borderLeft = "7px solid magenta";
+spc8S.borderRight = "7px solid magenta";
+// #endregion
+
+const gameEnded = (spc) =>
+{
+  const spcTest = (s) =>
+  {
+    if (s.childNodes[0] !== undefined)
+      {
+        if (s.querySelector(".xMark")) return 1;
+        else return 2;
+      }
+    else return 0;
+  }
+  
+  const test = (x, y, z) =>
+  {
+    if (spcTest(spc[x]) == 1 && spcTest(spc[y]) == 1 && spcTest(spc[z]) == 1) return 1;
+    else if (spcTest(spc[x]) == 2 && spcTest(spc[y]) == 2 && spcTest(spc[z]) == 2) return 2;
+    else return 0;
+  }
+  
+  const catsGame = (spcs) =>
+  {
+    let cat = true;
+    for (let s of spcs)
+      {
+        if (s.childNodes[0] !== undefined) continue;
+        return !cat;
+      }
+    return cat;
+  }
+  
+  // #region x wins
+  if (test(0, 1, 2) == 1) return 1;
+  else if (test(3, 4, 5) == 1) return 1;
+  else if (test(6, 7, 8) == 1) return 1;
+  else if (test(0, 3, 6) == 1) return 1;
+  else if (test(1, 4, 7) == 1) return 1;
+  else if (test(2, 5, 8) == 1) return 1;
+  else if (test(0, 4, 8) == 1) return 1;
+  else if (test(2, 4, 6) == 1) return 1;
+  // #endregion
+  
+  // #region o wins
+  else if (test(0, 1, 2) == 2) return 2;
+  else if (test(3, 4, 5) == 2) return 2;
+  else if (test(6, 7, 8) == 2) return 2;
+  else if (test(0, 3, 6) == 2) return 2;
+  else if (test(1, 4, 7) == 2) return 2;
+  else if (test(2, 5, 8) == 2) return 2;
+  else if (test(0, 4, 8) == 2) return 2;
+  else if (test(2, 4, 6) == 2) return 2;
+  // #endregion
+  
+  
+  else if (catsGame(spc)) return -1;
+  else return 0;
+}
+
+const reset = (spc, wich) =>
+{
+  cnt = 1;
+  if (wich === 1) alert("X has won!");
+  else if (wich === 2) alert("O has won!");
+  else alert("Cats game!");
+  for (let s of spc) if (s.childNodes[0] !== undefined) s.removeChild(s.childNodes[0]);
+}
+
+const rows = [row1, row2, row3];
+const spaces = [spc1, spc2, spc3, spc4, spc5, spc6, spc7, spc8, spc9];
+let cnt = 1;
+toSeeEle.addEventListener("click", (e) =>
+                       {
+  e.stopPropagation();
+  if (e.target.id !== "gameBord" && e.target.nodeName === "DIV" && !e.target.querySelector(".mark"))
+  {
+    if (cnt % 2 !== 0) newMark(e.target, "x");
+    else newMark(e.target, "o");
+    cnt++;
+    setTimeout(() => 
+            {
+      const gameEnds = gameEnded(spaces);
+      if (gameEnds == 1) reset(spaces, 1);
+      else if (gameEnds == 2) reset(spaces, 2);
+      else if (gameEnds == -1) reset(spaces, -1);
+    }, 10);
+  }
+}, true);
