@@ -1,0 +1,41 @@
+// Needy & Suicidal Button
+
+const main = document.body;
+const bDiv = document.createElement("DIV");
+const bDivSty = document.createElement("STYLE");
+const button = document.createElement("BUTTON");
+const tip = document.createElement("H4");
+let isDead = false;
+bDivSty.type = "text/css";
+bDivSty.innerHTML = "div{ padding: 30px 0px 0pc 20px }"
+button.innerText = "I'm a button";
+document.getElementsByTagName("html")[0].appendChild(bDivSty);
+tip.innerHTML = "<span id = \"tip\">tip:</span> what does all suicidals want?<br><br><span id = \"nop\">No, not very difficult.</span>";
+tip.querySelector("#tip").style.fontStyle = "oblique";
+tip.querySelector("#tip").style.color = "purple";
+tip.querySelector("#nop").style.color = "grey";
+tip.style.color = "magenta";
+bDiv.appendChild(button);
+main.appendChild(bDiv);
+main.appendChild(tip);
+button.addEventListener("click", (e) =>
+                     {
+  const whatDo = prompt("You clicked me, wow, rude dude.");
+  if (whatDo == "die")
+    {
+      isDead = true;
+      button.parentNode.removeChild(bDiv.querySelector("BUTTON"));
+      setTimeout(() =>
+                 {
+        alert("oh, u killed me, wow, thanks, i love u, bye");
+      }, 0);
+    }
+  else alert("oh, and u did that for fucking nothing," +
+             " cool, realy fucking coll, fuck u asshole");
+});
+
+bDiv.addEventListener("focusout", () =>
+                     {
+  if (!isDead) alert("yeah, i was finding it weird someone giving" +
+        " me attention, thats makes a lot more sense");
+});

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2021 by TomZamataro (http://jsbin.com/gihuxih/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="Neddy & Suicidal Button">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+<script id="jsbin-javascript">
+// Neddy & Suicidal Button
+
+const main = document.body;
+const bDiv = document.createElement("DIV");
+const bDivSty = document.createElement("STYLE");
+const button = document.createElement("BUTTON");
+const tip = document.createElement("H4");
+let isDead = false;
+bDivSty.type = "text/css";
+bDivSty.innerHTML = "div{ padding: 30px 0px 0pc 20px }"
+button.innerText = "I'm a button";
+document.getElementsByTagName("html")[0].appendChild(bDivSty);
+tip.innerText = "tip: what does all suicidals want? No, not very difficult.";
+tip.style.color = "grey";
+bDiv.appendChild(button);
+main.appendChild(bDiv);
+main.appendChild(tip);
+button.addEventListener("click", (e) =>
+                     {
+  const whatDo = prompt("You clicked me, wow, rude dude.");
+  if (whatDo == "die")
+    {
+      isDead = true;
+      button.parentNode.removeChild(bDiv.querySelector("BUTTON"));
+      setTimeout(() =>
+                 {
+        alert("oh, u killed me, wow, thanks, i love u, bye");
+      }, 0);
+    }
+  else alert("oh, and u did that for fucking nothing," +
+             " cool, realy fucking coll, fuck u asshole");
+});
+
+bDiv.addEventListener("focusout", () =>
+                     {
+  if (!isDead) alert("yeah, i was finding it weird someone giving" +
+        " me attention, thats makes a lot more sense");
+});
+</script>
+</body>
+</html>
