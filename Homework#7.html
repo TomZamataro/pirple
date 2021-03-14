@@ -1,4 +1,31 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2021 by TomZamataro (http://jsbin.com/pukelim/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="Homework#7 from Keeping Up With The Javascripts: ES6 by Pirple.com">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<script id="jsbin-javascript">
 // Homework#7 from Keeping Up With The Javascripts: ES6 by Pirple.com
+
+const durstenfeld = (arr) =>
+{
+  for (let i = arr.length - 1; i > 0; i--)
+    {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
 
 const realRandom = (min, max) =>
 {
@@ -42,34 +69,44 @@ const logId = (e, id, t, c) =>
 const origin = document.body;
 const recCl = document.createElement("STYLE");
 const title = document.createElement("H1");
-const desc = document.createElement("H3");30
+const desc = document.createElement("H3");
 const recWra = document.createElement("DIV");
-const conf = document.createElement("H4");
 const toRead = document.createElement("DIV");
+const conf = document.createElement("H4");
+const recTpl = document.createElement("DIV");
+const recTplDiv = document.createElement("DIV");
 recCl.type = "text/css";
 recCl.innerHTML = ".rectangle { background-color: white; width: 100px; height: 75px; }"
 document.getElementsByTagName("html")[0].appendChild(recCl);
 document.body.style.backgroundColor = "#663d73";
 document.body.style.color = "#ff9ece";
 title.innerText = "Homework#7 from Keeping Up With The Javascripts: ES6 by Pirple.com";
+title.style.padding = "0px 0px 0px 10px";
 desc.innerText = "This is the 7th homework of the course, in wich I'm supposed to create a webpage with some rectangles, each with a diferent color, and some other stuff in the pages html.";
+desc.style.padding = "0px 0px 0px 10px";
 recWra.id = "rectangleWrapper";
 recWra.style.padding = "50px 50px 0px 50px"; // top, right, bottom, left. 
-conf.innerText = "Confirmation that the div \"rectangleWrapper\" has 0px of bottom padding.";
-toRead.style.padding = "20px";
+conf.innerText = "Confirmation that the div \"rectangleWrapper\" has 0px of bottom padding.\nAnd here is the rectangle tamplate used:";
+recTpl.classList.add("rectangle");
+recTplDiv.style.padding = "0px 0px 50px 50px";
+toRead.style.padding = "5px 0px 0px 10px";
 origin.appendChild(title);
 origin.appendChild(desc);
 origin.appendChild(recWra);
-origin.appendChild(conf);
+toRead.appendChild(conf);
+recTplDiv.appendChild(recTpl);
 origin.appendChild(toRead);
+origin.appendChild(recTplDiv);
 const colors = ["#2CBBAC", "#AC51C0", "#5E3DF2", "#EC7AF0", "#A5F07A", "#F0C37A", "#EB0E0E", "#F7F71F", "#F5B5ED", "#11C861"];
+const ranCol = [...colors];
+durstenfeld(ranCol);
 for (let i = 0; i < colors.length; i++)
   {
     const rs = randomRecSize(50, 200, 0.75);
     const r = document.createElement("DIV");
-    const t = document.createElement("P");
+    const t = document.createElement("H4");
     r.classList.add("rectangle");
-    r.style.backgroundColor = colors[i];
+    r.style.backgroundColor = ranCol[i];
     r.style.width = rs[0];
     r.style.height = rs[1];
     r.id = `00${i}`;
@@ -88,3 +125,19 @@ for (let c of recWra.childNodes)
         count = logId(c.style, c.id, count, colors[count]);
       }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
