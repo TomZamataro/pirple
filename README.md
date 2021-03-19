@@ -1,1 +1,1 @@
-shit that I did on/cuz pirple mainly on jsbin, yeah, thats it
+shit that I did on/cuz Pirple.com - wich is a site to lear programing and stuff - mainly on jsbin, yeah, that's it.
