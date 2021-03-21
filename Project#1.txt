@@ -1,0 +1,103 @@
+// #region functions
+const newStyleClass = (name, rule, clOrId = false) =>
+{
+  const ns = document.createElement("STYLE");
+  ns.type = "text/css";
+  if (clOrId) ns.innerHTML = `${name} ${rule}`;
+  else ns.innerHTML = `.${name} ${rule}`;
+  document.getElementsByTagName("HTML")[0].appendChild(ns);
+  return ns;
+}
+
+const newElement = (parent, type, id = false, clas = false) =>
+{
+  const ne = document.createElement(type);
+  if (id) ne.id = id;
+  if (clas) if (typeof clas !== "string") for (let c of clas) ne.classList.add(c);
+  else ne.classList.add(clas);
+  if (parent !== false) parent.appendChild(ne);
+  return ne;
+}
+
+// #region storageCheck
+// code source: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability:~:text=function%20storageAvailable(type)%20%7B
+
+const storageAvailable = (type) =>
+{
+  // type == localStorage || sesionStorage
+    let storage;
+    try
+    {
+        storage = window[type];
+        let x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e)
+    {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+// #endregion
+
+// #endregion
+
+// #region !DOCTYPE elements
+const html = document.querySelector("HTML")[0];
+const head = document.querySelector("HEAD");
+const body = document.querySelector("BODY");
+// body.classList.add("body-sty");
+// body.style.backgroundColor = "#663d73";
+// body.style.color = "red"; // #ff9ece
+// #endregion
+// #region new css style classes
+// dSty_ indicates that the style class is of a div
+const bodySty = newStyleClass("body", "{background-color: #663d73;" +
+                                      " color: #ff9ece;" +
+                                      " generic-family: monospace;" +
+                                      " font-family: Courier New;" +
+                                      " font-size: 25px;", true);
+// dSty_ indicates that this css style class is of a div
+const dSty_login = newStyleClass("div.login", "{background-color: #ff9ece;" +
+                                              " color: #663d73;" +
+                                              " margin: auto;" +
+                                              " margin-top: 100px;" +
+                                              " width: 50%;" +
+                                              " border: 5px double #FBFF8B;" +
+                                              " padding: 20px;" +
+                                              " left: 100px;", true);
+// sty_ indicates that this css style class is a general one, for all elements
+const sty_focus = newStyleClass("*:focus", "{outline: 4px ridge #8657f0}", true); // #8657f0
+// inSty_ indicates that this css style class is of a input
+const inSty_g1 = newStyleClass("input", "{generic-family: monospace;" +
+                                        " font-family: Courier New;}", true);
+const inSty_inPink = newStyleClass("input.inPink", "{background-color: #663d73;" +
+                                                   " color: #ff9ece;" +
+                                                   " border: 2px solid #fbff8b", true);
+const inSty_inPurple = newStyleClass("input.inPurple", "{background-color: #ff9ece;" +
+                                                   " color: #663d73;" +
+                                                   " border: 2px solid #FBFF8B", true);
+console.log(bodySty.innerText);
+// #endregion
+// #region new elements
+const d_login = newElement(body, "DIV", "D-000", "login"); // d_ indicates that the element is a div
+d_login.innerHTML += "<di><b>your email:</b></di>";
+const in_email = newElement(d_login, "INPUT", "IN-000", "inPink"); // in_ indicates that the element is a input
+const in_emailS = in_email.style; // aElementS indicates that this variable is the css style of "aElement"
+console.log(in_email.innerText);
+// #endregion
+// #region login page
+
+// #endregion
