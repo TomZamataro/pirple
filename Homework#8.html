@@ -3,7 +3,7 @@
 Created using JS Bin
 http://jsbin.com
 
-Copyright (c) 2021 by TomZamataro (http://jsbin.com/qaqirib/3/edit)
+Copyright (c) 2021 by TomZamataro (http://jsbin.com/locucez/1/edit)
 
 Released under the MIT license: http://jsbin.mit-license.org
 -->
@@ -32,7 +32,7 @@ const newElement = (parent, type, id = false, clas = false) =>
 {
   const ne = document.createElement(type);
   if (id) ne.id = id;
-  if (clas) if (typeof clas !== "string") for (c of clas)
+  if (clas) if (typeof clas !== "string") for (let c of clas)
   {
     ne.classList.add(c);
     if (c === "xMark") ne.innerText = "X";
@@ -63,24 +63,27 @@ const newMark = (parent, wich, id = false) =>
 }
 
 const html = document.getElementsByTagName("HTML")[0];
+const head = document.head;
 const main = document.body;
 const toSeeSty = newStyleClass(html, "toSeeSty", "{border: 5px solid yellow;" +
-                                                 " position: absolute;" +
-                                                 " margin: 100px;" +
-                                                 " margin-top: -1px;" +
-                                                 " padding: 100px 100px 100px 100px;" +
-                                                 " background-color: purple;}")
+                                                 /*" position: relative;" +*/
+                                                 " width: 325px;" +
+                                                 " margin: auto;" +
+                                                 " margin-top: 100px;" +
+                                                 " padding: 50px;" +
+                                                 " background-color: purple;}");
 const spaceSty = newStyleClass(html, "spaceSty", "{border: 7px solid purple;" +
-                                           " height: 100px;" +
-                                           " width: 100px;" +
-                                           " text-align: center;" +
-                                           " generic-family: monospace;" +
-                                           " font-family: Courier New;}");
+                                                 " height: 100px;" +
+                                                 " width: 100px;" +
+                                                 " text-align: center;" +
+                                                 " generic-family: monospace;" +
+                                                 " font-family: Courier New;}");
 const mark = newStyleClass(html, "mark", "{font-size: 120px;" +
                                          " margin-top: -20px}");
 const xMark = newStyleClass(html, "xMark", "{color: red}");
 const oMark = newStyleClass(html, "oMark", "{color: black}");
 const toSeeEle = newElement(main, "DIV", "gameBord", "toSeeSty");
+head.getElementsByTagName("TITLE").innerText = "Pirple tic-tac-toe - by TZ [Homework#8]"
 
 // #region 1st row.
 const row1 = newElement(toSeeEle, "DIV");
@@ -226,6 +229,25 @@ toSeeEle.addEventListener("click", (e) =>
     }, 10);
   }
 }, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
