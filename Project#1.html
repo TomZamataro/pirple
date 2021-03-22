@@ -27,14 +27,14 @@ const newStyleClass = (name, rule, clOrId = false) =>
   return ns;
 }
 
-const newElement = (parent, type, id = false, clas = false) =>
+const newElement = (parent, type, id = false, clas = false, retur = true) =>
 {
   const ne = document.createElement(type);
   if (id) ne.id = id;
   if (clas) if (typeof clas !== "string") for (let c of clas) ne.classList.add(c);
   else ne.classList.add(clas);
   if (parent !== false) parent.appendChild(ne);
-  return ne;
+  if (retur) return ne;
 }
 
 // #region storageCheck
@@ -80,6 +80,7 @@ const body = document.querySelector("BODY");
 // body.style.backgroundColor = "#663d73";
 // body.style.color = "red"; // #ff9ece
 // #endregion
+
 // #region new css style classes
 // dSty_ indicates that the style class is of a div
 const bodySty = newStyleClass("body", "{background-color: #663d73;" +
@@ -87,36 +88,91 @@ const bodySty = newStyleClass("body", "{background-color: #663d73;" +
                                       " generic-family: monospace;" +
                                       " font-family: Courier New;" +
                                       " font-size: 25px;", true);
+const dSty_inPink = newStyleClass("div.inPink", "{background-color: #ff9ece;" +
+                                         " color: #663d73;" +
+                                         " border: 5px double #fbff8b;" +
+                                         " font-size: inherit;" +
+                                         " generic-family: inherit;" +
+                                         " font-family: inherit}", true);
+const dSty_inPurple = newStyleClass("div.inPurple", "{background-color: #663d73;" +
+                                         " color: #ff9ece;" +
+                                         " border: 5px double #fbff8b;" +
+                                         " font-size: inherit;" +
+                                         " generic-family: inherit;" +
+                                         " font-family: inherit}", true);
 // dSty_ indicates that this css style class is of a div
-const dSty_login = newStyleClass("div.login", "{background-color: #ff9ece;" +
-                                              " color: #663d73;" +
-                                              " margin: auto;" +
-                                              " margin-top: 100px;" +
-                                              " width: 50%;" +
-                                              " border: 5px double #FBFF8B;" +
-                                              " padding: 20px;" +
-                                              " left: 100px;", true);
+const dSty_login = newStyleClass("div.login", "{margin: auto;" +
+                                              " margin-top: 20%;" +
+                                              " width: 533px;" +
+                                              " padding: 20px;", true);
+const spSty_clear = newStyleClass("span.clear", "{clear: both;" +
+                                               " display: block}", true);
 // sty_ indicates that this css style class is a general one, for all elements
 const sty_focus = newStyleClass("*:focus", "{outline: 4px ridge #8657f0}", true); // #8657f0
-// inSty_ indicates that this css style class is of a input
-const inSty_g1 = newStyleClass("input", "{generic-family: monospace; font-family: Courier New;}", true);
+// inSty_g* indicates that this css style class is foe all inputs
+const inSty_g1 = newStyleClass("input", "{generic-family: monospace;" +
+                                        " font-family: Courier New;" +
+                                        " border: 2px solid #fbff8b;" +
+                                        " font-size: inherit}", true);
 const inSty_inPink = newStyleClass("input.inPink", "{background-color: #663d73;" +
-                                                   " color: #ff9ece;" +
-                                                   " border: 2px solid #fbff8b", true);
+                                                   " color: #ff9ece;}", true);
 const inSty_inPurple = newStyleClass("input.inPurple", "{background-color: #ff9ece;" +
-                                                   " color: #663d73;" +
-                                                   " border: 2px solid #FBFF8B", true);
-console.log(bodySty.innerText);
+                                                       " color: #663d73;}", true);
+const bSty_g1 = newStyleClass("button", "{generic-family: inherit;" +
+                                        " font-family: inherit;" +
+                                        " border: 2px solid yellow;" +
+                                        " font-size: inherit;" +
+                                        " margin-top: 5px;}", true);
+const bSty_inPink = newStyleClass("button.inPink", "{background-color: #663d73;" +
+                                                   " color: #ff9ece}", true);
+const bSty_inPurple = newStyleClass("button.inPurple", "{background-color: #ff9ece;" +
+                                                   " color: #663d73}", true);
 // #endregion
-// #region new elements
-const d_login = newElement(body, "DIV", "D-000", "login"); // d_ indicates that the element is a div
-d_login.innerHTML += "<di><b>your email:</b></di>";
-const in_email = newElement(d_login, "INPUT", "IN-000", "inPink"); // in_ indicates that the element is a input
-const in_emailS = in_email.style; // aElementS indicates that this variable is the css style of "aElement"
-console.log(in_email.innerText);
-// #endregion
-// #region login page
 
+// #region login page
+const d_loginPage = newElement(body, "DIV", "D-000");
+// #region page title
+const d_title = newElement(d_loginPage, "DIV", "D-001"); // ***
+const d_titleS = d_title.style;
+d_titleS.margin = "auto";
+const h1_title = newElement(d_title, "H1", "H1-000");
+h1_titleS = h1_title.style;
+// h1_titleS.textAlign = "center";
+h1_title.innerHTML = "Pirple to-do list - Project#1<br>by Tom Zamataro"
+// #endregion
+
+// #region login box
+const d_loginBox = newElement(d_loginPage, "DIV", "D-001", ["inPink", "login"]); // d_ indicates that the element is a div
+const d_loginBoxS = d_loginBox.style;
+const d_loEmail = newElement(d_loginBox, "DIV", "D-002");
+const sp_loEmTxt = newElement(d_loEmail, "SPAN", "SP-000");
+sp_loEmTxt.innerHTML = "<di><b>your email:</b></di>";
+const in_loEmEmail = newElement(d_loEmail, "INPUT", "IN-000", "inPink"); // in_ indicates that the element is a input
+const in_loEmEmailS = in_loEmEmail.style; // aElementS indicates that this variable is the css style of "aElement"
+in_loEmEmailS.float = "right"
+newElement(d_loEmail, "SPAN", false, "clear", false);
+const d_loPsw = newElement(d_loginBox, "DIV", "D-003");
+const d_loPswS = d_loPsw.style;
+d_loPswS.marginTop = "5px";
+const sp_loPsTxt = newElement(d_loPsw, "SPAN", "SP-001");
+sp_loPsTxt.innerHTML += "<di><b>your password:</b></di>";
+const in_loPsPsw = newElement(d_loPsw, "INPUT", "IN-001", "inPink");
+const in_loPsPswS = in_loPsPsw.style;
+in_loPsPswS.float = "right";
+in_loPsPsw.setAttribute("type", "password")
+const b_loLogin = newElement(d_loginBox, "BUTTON", "B-000", "inPink");
+const b_loLoginS = b_loLogin.style;
+b_loLogin.innerHTML = "<b>Log In</b>";
+b_loLoginS.float = "right";
+b_loLogin.addEventListener("click", (e) =>
+                        {
+  console.log(in_loEmEmail.value, in_loPsPsw.value);
+});
+newElement(d_loPsw, "SPAN", false, "clear", false);
+newElement(d_loginBox, "SPAN", false, "clear", false);
+// #endregion
+
+console.log();
 // #endregion
 
 
